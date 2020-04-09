@@ -91,3 +91,15 @@ function guru_create_platform_tax()
 }
 // initialise on theme setup
 add_action('init', 'guru_create_platform_tax');
+
+// make meta data show up on game posts
+add_filter( 'generate_entry_meta_post_types', function( $types ) {
+  $types[] = 'games';
+  return $types;
+} );
+
+add_filter( 'generate_footer_meta_post_types', function( $types ) {
+  // $types[] = 'my-post-type';
+  $types[] = 'games';
+  return $types;
+} );

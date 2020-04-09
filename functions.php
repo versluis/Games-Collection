@@ -103,3 +103,10 @@ add_filter( 'generate_footer_meta_post_types', function( $types ) {
   $types[] = 'games';
   return $types;
 } );
+
+// add Platform taxonomy to footer meta 
+add_filter( 'generate_category_list_output', function( $output ) {
+  $terms = get_the_term_list( get_the_ID(), 'platform', '', ', ' );
+
+  return '<span class="terms"> &#127918; ' . $terms . '</span>' . $output;
+} );

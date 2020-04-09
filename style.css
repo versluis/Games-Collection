@@ -12,3 +12,6 @@
  /* == Add your own styles below this line ==
 --------------------------------------------*/
 
+#nav-below {
+    display: none;
+}

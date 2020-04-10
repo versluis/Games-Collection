@@ -67,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 'nopaging' => true )
             );
             $results = $query->found_posts;
-            echo "<p>There are <strong>$results PS4 Games</strong> in my collection:</p><div>";
+            echo "<p>There are <strong>$results PS4 Games</strong> in my collection:</p><ul>";
 
             // list all games
             if ($query->have_posts() ) {
@@ -76,7 +76,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $query->the_post();
                     echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
                 }
-                echo "</div>";
+                echo "</ul>";
             } // end of games list
 
 			wp_link_pages( array(

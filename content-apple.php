@@ -63,11 +63,11 @@ if ( ! defined( 'ABSPATH' ) ) {
             // custom query goes here
             // grab all games with platform
             $query = new WP_Query( array( 
-                'platform' => 'steam', 
+                'platform' => 'apple', 
                 'nopaging' => true )
             );
             $results = $query->found_posts;
-            echo "<p>There are <strong>$results Steam Games</strong> in my collection:</p><ul>";
+            echo "<p>There are <strong>$results Apple Arcade Games</strong> in my collection:</p><ul>";
 
             // list all games
             if ($query->have_posts() ) {

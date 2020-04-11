@@ -163,3 +163,16 @@ if ( ! function_exists( 'generate_add_footer_info' ) ) {
 		echo apply_filters( 'generate_copyright', $copyright ); // WPCS: XSS ok.
 	}
 }
+
+// add Genre to Tag Archives, Status to Categories
+add_filter( 'get_the_archive_title', function( $title ) {
+  if ( is_tag() ) {
+      $title = 'Genre: ' . $title;
+  }
+
+  if (is_category()) {
+    $title = 'Status: ' . $title;
+  }
+
+  return $title;
+}, 50 );

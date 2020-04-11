@@ -92,6 +92,24 @@ function guru_create_platform_tax()
 // initialise on theme setup
 add_action('init', 'guru_create_platform_tax');
 
+// set default Platform on Game Posts
+// https://silentcomics.com/wordpress/automatic-default-taxonomy-for-a-custom-post-type/
+function guru_set_default_platform( $post_id, $post ) {
+  if ( 'publish' === $post->post_status && $post->post_type === 'games' ) {
+      $defaults = array(
+          'category' => array( 'not-played' )
+          );
+      $taxonomies = get_object_taxonomies( $post->post_type );
+      foreach ( (array) $taxonomies as $taxonomy ) {
+          $terms = wp_get_post_terms( $post_id, $taxonomy );
+          if ( empty( $terms ) && array_key_exists( $taxonomy, $defaults ) ) {
+              wp_set_object_terms( $post_id, $defaults[$taxonomy], $taxonomy );
+          }
+      }
+  }
+}
+add_action( 'save_post', 'guru_set_default_platform', 0, 2 );
+
 // make meta data show up on game posts
 add_filter( 'generate_entry_meta_post_types', function( $types ) {
   $types[] = 'games';
@@ -108,7 +126,7 @@ add_filter( 'generate_footer_meta_post_types', function( $types ) {
 add_filter( 'generate_category_list_output', function( $output ) {
   $terms = get_the_term_list( get_the_ID(), 'platform', '', ', ' );
   if ($terms) {
-    return '<span class="terms"> &#127918; ' . $terms . '</span>' . $output;
+    return '<span class="terms"> &#127918; Platform: ' . $terms . '</span>' . $output;
   } else 
   return $output;
   

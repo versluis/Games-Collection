@@ -122,6 +122,14 @@ add_filter( 'generate_footer_meta_post_types', function( $types ) {
   return $types;
 } );
 
+// add game posts to regular WordPress queries
+function guru_add_games_to_query( $query ) {
+  if ( $query->is_archive() && $query->is_main_query() ) {
+      $query->set( 'post_type', array('post', 'games') );
+  }
+}
+add_action( 'pre_get_posts', 'guru_add_games_to_query' );
+
 // add Platform taxonomy to footer meta (when available)
 add_filter( 'generate_category_list_output', function( $output ) {
   $terms = get_the_term_list( get_the_ID(), 'platform', '', ', ' );
@@ -132,6 +140,7 @@ add_filter( 'generate_category_list_output', function( $output ) {
   
 } );
 
+// ********************************************************
 // redefine footer content
 remove_action( 'generate_credits', 'generate_add_footer_info' );
 

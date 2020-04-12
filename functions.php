@@ -211,3 +211,12 @@ add_filter( 'get_the_archive_title', function( $title ) {
 
   return $title;
 }, 50 );
+
+// show which template part is being used (debug only)
+function guru_which_template() {
+	if ( is_super_admin() ) {
+		global $template;
+    print_r( "<h1>Currently using: $template</h1>" );
+	}
+}
+// add_action( 'wp_footer', 'guru_which_template' );

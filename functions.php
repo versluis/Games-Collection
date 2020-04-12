@@ -110,6 +110,7 @@ function guru_set_default_platform( $post_id, $post ) {
 }
 add_action( 'save_post', 'guru_set_default_platform', 0, 2 );
 
+// META DATA
 // make meta data show up on game posts
 add_filter( 'generate_entry_meta_post_types', function( $types ) {
   $types[] = 'games';
@@ -130,6 +131,26 @@ function guru_add_games_to_query( $query ) {
 }
 add_action( 'pre_get_posts', 'guru_add_games_to_query' );
 
+//*********************************** */
+// add Status in front of categories
+add_filter( 'generate_category_list_output', function() {
+  $categories = apply_filters( 'generate_show_categories', true );
+
+  $term_separator = apply_filters( 'generate_term_separator', _x( ', ', 'Used between list items, there is a space after the comma.', 'generatepress' ), 'categories' );
+  $categories_list = get_the_category_list( $term_separator );
+
+  return sprintf( '<span class="cat-links">Status: %3$s<span class="screen-reader-text">%1$s </span>%2$s</span> ', // WPCS: XSS ok, sanitization ok.
+      esc_html_x( 'Categories', 'Used before category names.', 'generatepress' ),
+      $categories_list,
+      // strip_tags( $categories_list ),
+      apply_filters( 'generate_inside_post_meta_item_output', '', 'categories' )
+  );
+} );
+
+// add Genre in front of Tags
+// can't be done - but this is where it should be done :-)
+//*********************************** */
+
 // add Platform taxonomy to footer meta (when available)
 add_filter( 'generate_category_list_output', function( $output ) {
   $terms = get_the_term_list( get_the_ID(), 'platform', '', ', ' );
@@ -139,6 +160,8 @@ add_filter( 'generate_category_list_output', function( $output ) {
   return $output;
   
 } );
+
+
 
 // ********************************************************
 // redefine footer content

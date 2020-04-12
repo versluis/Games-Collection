@@ -69,16 +69,16 @@ if ( ! defined( 'ABSPATH' ) ) {
                 'posts_per_page' => 1,
             ));
             $results = $query->found_posts;
-            echo "<p>Here's a random game from the <strong>whole collection</strong>:</p><ul>";
+            echo "<p>Here's a random game from the <strong>whole collection</strong>:</p>";
 
             // list random title
             if ($query->have_posts() ) {
                 echo "";
                 while ($query->have_posts() ) {
                     $query->the_post();
-                    echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+                    echo '<p><a class="button gradient2" href="' . get_permalink() . '">' . get_the_title() . '</a></p>';
                 }
-                echo "</ul>";
+                echo "";
             } // end of random all
 
             // ************************
@@ -91,16 +91,16 @@ if ( ! defined( 'ABSPATH' ) ) {
                 'posts_per_page' => 1,
             ));
             $results = $query->found_posts;
-            echo "<p>Here's a random game that I <strong>haven't played</strong>:</p><ul>";
+            echo "<p>Here's a random game that I <strong>haven't played</strong>:</p>";
 
             // list random title
             if ($query->have_posts() ) {
                 echo "";
                 while ($query->have_posts() ) {
                     $query->the_post();
-                    echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+                    echo '<p><a class="button gradient" href="' . get_permalink() . '">' . get_the_title() . '</a></p>';
                 }
-                echo "</ul>";
+                echo "";
             } // end of random not played
 
             // **************************
@@ -113,16 +113,16 @@ if ( ! defined( 'ABSPATH' ) ) {
                 'posts_per_page' => 1,
             ));
             $results = $query->found_posts;
-            echo "<p>Here's a random game that I <strong>haven't streamed</strong>:</p><ul>";
+            echo "<p>Here's a random game that I <strong>haven't streamed</strong>:</p>";
 
             // list random title
             if ($query->have_posts() ) {
                 echo "";
                 while ($query->have_posts() ) {
                     $query->the_post();
-                    echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+                    echo '<p><a class="button gradient3" href="' . get_permalink() . '">' . get_the_title() . '</a></p>';
                 }
-                echo "</ul>";
+                echo "";
             } // end of random not played
 
 

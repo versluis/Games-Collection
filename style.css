@@ -16,6 +16,10 @@
     display: none;
 }
 
+.platform {
+    margin-left: -3px;
+}
+
 .search-submit {
     border-radius: 5px;
 }

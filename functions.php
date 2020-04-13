@@ -28,6 +28,12 @@ add_action('wp_enqueue_scripts', 'your_theme_enqueue_styles');
 /*  Add your own functions below this line.
     ======================================== */ 
 
+/************************************/
+/*
+/* CUSTOM GAME POST
+/*
+/************************************/
+
 // Create a custom GAME Post Type
 function guru_create_game_posttype()
 {
@@ -111,7 +117,18 @@ function guru_set_default_platform( $post_id, $post ) {
 }
 add_action( 'save_post', 'guru_set_default_platform', 0, 2 );
 
-// META DATA
+// make links in the content clickable
+function guru_clickable_content ($content){
+  $content = make_clickable($content);
+  return $content;
+}
+add_filter ('the_content', 'guru_clickable_content');
+
+/************************************/
+/*
+/* META DATA
+/*
+/************************************/
 // make meta data show up on game posts
 add_filter( 'generate_entry_meta_post_types', function( $types ) {
   $types[] = 'games';
@@ -133,8 +150,7 @@ function guru_add_games_to_query( $query ) {
 if (!is_admin()) {
   add_action( 'pre_get_posts', 'guru_add_games_to_query' );
 }
-
-//*********************************** */
+   
 // add Status in front of categories
 add_filter( 'generate_category_list_output', function() {
   $categories = apply_filters( 'generate_show_categories', true );
@@ -164,7 +180,6 @@ add_filter( 'generate_tag_list_output', function() {
       apply_filters( 'generate_inside_post_meta_item_output', '', 'categories' )
   );
 } );
-//*********************************** */
 
 // add Platform taxonomy to footer meta (when available)
 add_filter( 'generate_category_list_output', function( $output ) {
@@ -175,7 +190,6 @@ add_filter( 'generate_category_list_output', function( $output ) {
   return $output;
   
 } );
-
 
 
 // ********************************************************
@@ -215,6 +229,11 @@ add_filter( 'get_the_archive_title', function( $title ) {
   return $title;
 }, 50 );
 
+/************************************/
+/*
+/* DEBUG AIDES
+/*
+/************************************/             
 // show which template part is being used (debug only)
 function guru_which_template() {
 	if ( is_super_admin() ) {

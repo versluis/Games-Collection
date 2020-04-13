@@ -92,12 +92,13 @@ function guru_create_platform_tax()
 // initialise on theme setup
 add_action('init', 'guru_create_platform_tax');
 
-// set default Platform on Game Posts
+// set default Category and Platform on Game Posts
 // https://silentcomics.com/wordpress/automatic-default-taxonomy-for-a-custom-post-type/
 function guru_set_default_platform( $post_id, $post ) {
   if ( 'publish' === $post->post_status && $post->post_type === 'games' ) {
       $defaults = array(
-          'category' => array( 'not-played' )
+          'category' => array( 'not-played' ),
+          'platform' => array ( 'steam' ),
           );
       $taxonomies = get_object_taxonomies( $post->post_type );
       foreach ( (array) $taxonomies as $taxonomy ) {

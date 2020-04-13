@@ -185,7 +185,7 @@ add_filter( 'generate_tag_list_output', function() {
 add_filter( 'generate_category_list_output', function( $output ) {
   $terms = get_the_term_list( get_the_ID(), 'platform', '', ', ' );
   if ($terms) {
-    return '<span class="terms"> &#127918; Platform: ' . $terms . '</span>' . $output;
+    return '<span class="platform"> &#127918; Platform: ' . $terms . '</span>' . $output;
   } else 
   return $output;
   
@@ -245,7 +245,7 @@ function guru_which_template() {
 
 /************************************/
 /*
-/* CUSTOM FIELDS
+/* CUSTOM META FIELDS
 /*
 /************************************/  
 
@@ -253,7 +253,7 @@ function guru_which_template() {
 function guru_add_meta_box()
 {
   add_meta_box(
-    'your_fields_meta_box', // $id
+    'guru_fields_meta_box', // $id
     'Game Store Links', // $title
     'guru_display_meta_box', // $callback
     'games', // $screen
@@ -276,7 +276,8 @@ function guru_display_meta_box()
 
   <p>
     <label for="guru_fields[steamURL]">Steam URL: </label>
-    <input type="text" name="guru_fields[steamURL]" id="your_fields[steamURL]" class="regular-text" value="<?php echo $meta['steamURL']; ?>">
+    <input type="text" name="guru_fields[steamURL]" id="guru_fields[steamURL]" 
+    class="regular-text" value="<?php echo $meta['steamURL']; ?>">
   </p>
 
 <?php }
@@ -303,9 +304,9 @@ function guru_save_fields_meta($post_id)
 
   $old = get_post_meta($post_id, 'guru_fields', true);
   $new = $_POST['guru_fields'];
-  $new = sanitize_text_field ($new);
-  $new = normalize_whitespace ($new);
-  $new = trim($new);
+  // $new = sanitize_text_field ($new);
+  // $new = normalize_whitespace ($new);
+  // $new = trim($new);
 
   if ($new && $new !== $old) {
     update_post_meta($post_id, 'guru_fields', $new);
@@ -323,25 +324,22 @@ add_action('save_post', 'guru_save_fields_meta');
 
 // if we have a Steam URL in our content, display a widget
 // based on https://github.com/ruLait/wp-steam-shortcode
-function guru_check_steam_content () {
+function guru_show_steam_widget ( $steamURL ) {
   
-  // search the_content for steam URL
-
   // extract Steam ID
+  $parts = explode('/', $steamURL);
+  $steamID = $parts[4];
+  $width = '100%';
+  $class = 'steamWidget';
 
-  // if we have a Steam ID, let's get to work
-  if (1) {
   // generate Steam Widget
-      $out = '<iframe id="' . htmlspecialchars($id) . 
-      '" class="' . htmlspecialchars($class) . 
-      '" style="width: ' . htmlspecialchars($width) .
-      '; height: 190px; border: 0;" src="//store.steampowered.com/widget/' . 
-      htmlspecialchars($item) . $subitem . '?t=' . 
-      rawurlencode($text). '" scrolling="no"></iframe>';
-	} else if ($type == 'greenlight') {
-      $out = '<iframe id="' . htmlspecialchars($id) . '" class="' . htmlspecialchars($class) . '" style="width: 336px; height: 137px; border: 0;" src="//steamcommunity.com/sharedfiles/widget/'. htmlspecialchars($item). '" scrolling="no"></iframe>';
+  $steamWidget = '<iframe id="' . htmlspecialchars($steamID) . 
+  '" class="' . htmlspecialchars($class) . 
+  '" style="width: ' . htmlspecialchars($width) .
+  '; height: 190px; border: 0;" src="//store.steampowered.com/widget/' . 
+  htmlspecialchars($steamID) . $subitem . '?t=' . 
+  rawurlencode($text). '" scrolling="no"></iframe>';
 
-    // insert widget before content
-  }
+  // show widget
+  echo $steamWidget;
 }
-  // apply_filters( 'the_content', 'guru_check_steam_content');

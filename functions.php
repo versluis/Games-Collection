@@ -129,7 +129,9 @@ function guru_add_games_to_query( $query ) {
       $query->set( 'post_type', array('post', 'games') );
   }
 }
-add_action( 'pre_get_posts', 'guru_add_games_to_query' );
+if (!is_admin()) {
+  add_action( 'pre_get_posts', 'guru_add_games_to_query' );
+}
 
 //*********************************** */
 // add Status in front of categories

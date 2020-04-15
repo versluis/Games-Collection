@@ -104,7 +104,7 @@ function guru_set_default_platform( $post_id, $post ) {
   if ( 'publish' === $post->post_status && $post->post_type === 'games' ) {
       $defaults = array(
           'category' => array( 'not-played' ),
-          'platform' => array ( 'epic' ),
+          'platform' => array ( 'ps4' ),
           );
       $taxonomies = get_object_taxonomies( $post->post_type );
       foreach ( (array) $taxonomies as $taxonomy ) {

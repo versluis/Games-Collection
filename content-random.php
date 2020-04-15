@@ -76,7 +76,19 @@ if ( ! defined( 'ABSPATH' ) ) {
                 echo "";
                 while ($query->have_posts() ) {
                     $query->the_post();
-                    echo '<p><a class="button gradient2" href="' . get_permalink() . '">' . get_the_title() . '</a></p>';
+
+                    // if we have a Steam URL, display that
+                    // otherwise show a button
+                    $meta = get_post_meta(get_the_id(), 'guru_fields', true);
+                    if ($meta['steamURL']) {
+                        echo '<h1 class="entry-title"><a href="' . get_permalink() . 
+                        '">' . get_the_title() . '</a></h1><br>';
+                        guru_show_steam_widget( $meta['steamURL'] );
+                    
+                    } else {
+                        echo '<p><a class="button gradient2" href="' . get_permalink() . 
+                          '">' . get_the_title() . '</a></p>';
+                    } 
                 }
                 echo "";
             } // end of random all
@@ -98,7 +110,19 @@ if ( ! defined( 'ABSPATH' ) ) {
                 echo "";
                 while ($query->have_posts() ) {
                     $query->the_post();
-                    echo '<p><a class="button gradient" href="' . get_permalink() . '">' . get_the_title() . '</a></p>';
+                    
+                    // if we have a Steam URL, display that
+                    // otherwise show a button
+                    $meta = get_post_meta(get_the_id(), 'guru_fields', true);
+                    if ($meta['steamURL']) {
+                        echo '<h1 class="entry-title"><a href="' . get_permalink() . 
+                        '">' . get_the_title() . '</a></h1><br>';
+                        guru_show_steam_widget( $meta['steamURL'] );
+                    
+                    } else {
+                        echo '<p><a class="button gradient" href="' . get_permalink() . 
+                          '">' . get_the_title() . '</a></p>';
+                    } 
                 }
                 echo "";
             } // end of random not played
@@ -120,7 +144,19 @@ if ( ! defined( 'ABSPATH' ) ) {
                 echo "";
                 while ($query->have_posts() ) {
                     $query->the_post();
-                    echo '<p><a class="button gradient3" href="' . get_permalink() . '">' . get_the_title() . '</a></p>';
+
+                    // if we have a Steam URL, display that
+                    // otherwise show a button
+                    $meta = get_post_meta(get_the_id(), 'guru_fields', true);
+                    if ($meta['steamURL']) {
+                        echo '<h1 class="entry-title"><a href="' . get_permalink() . 
+                        '">' . get_the_title() . '</a></h1><br>';
+                        guru_show_steam_widget( $meta['steamURL'] );
+                    
+                    } else {
+                        echo '<p><a class="button gradient3" href="' . get_permalink() . 
+                          '">' . get_the_title() . '</a></p>';
+                    } 
                 }
                 echo "";
             } // end of random not played

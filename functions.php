@@ -238,7 +238,7 @@ add_filter( 'get_the_archive_title', function( $title ) {
 function guru_which_template() {
 	if ( is_super_admin() ) {
 		global $template;
-    print_r( "<h1>Currently using: $template</h1>" );
+    print_r( "<strong>Currently using: $template</strong>" );
 	}
 }
 // add_action( 'wp_footer', 'guru_which_template' );

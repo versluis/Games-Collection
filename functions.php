@@ -32,11 +32,11 @@ add_action('wp_enqueue_scripts', 'your_theme_enqueue_styles');
 include plugin_dir_path(__FILE__).'includes/game-post.php';
 include plugin_dir_path(__FILE__).'includes/platform-tax.php';
 include plugin_dir_path(__FILE__).'includes/default-platform.php';
-include plugin_dir_path(__FILE__).'includes/debug.php';
 include plugin_dir_path(__FILE__).'includes/meta.php';
 include plugin_dir_path(__FILE__).'includes/footer-tweak.php';
 include plugin_dir_path(__FILE__).'includes/custom-fields.php';
 include plugin_dir_path(__FILE__).'includes/steam-widget.php';
+// include plugin_dir_path(__FILE__).'includes/debug.php';
 
 
 // add game posts to regular WordPress queries

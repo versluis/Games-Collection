@@ -64,10 +64,13 @@ if ( ! defined( 'ABSPATH' ) ) {
             // grab all games with platform
             $query = new WP_Query( array( 
                 'post_type' => 'games', 
-                'nopaging' => true )
+				'posts_per_page' => -1,
+				'nopaging' => true,
+				)
             );
             $results = $query->found_posts;
             echo "<p>Here's a list of all <strong>$results Games</strong> in my collection:</p><ul>";
+			// wp_reset_post_data();
 
             // list all games
             if ($query->have_posts() ) {
@@ -77,8 +80,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 					$id = get_the_id($query->the_post());
 					$terms = get_the_terms ($id, 'platform');
 					$platform = $terms[0]->name;
+
+					$meta = get_post_meta(get_the_id(), 'guru_fields', true);
+
 					echo '<li><a href="' . get_permalink() . '">' . get_the_title() 
-					. ' (' . $platform . ') ' . get_the_date ('Y') . '</a></li>';
+					. ' (' . $platform . ') ' . $meta[releaseYear] . '</a></li>';
                 }
                 echo "</ul>";
             } // end of games list

@@ -10,7 +10,7 @@ function guru_add_meta_box()
 {
   add_meta_box(
     'guru_fields_meta_box', // $id
-    'Game Store Links', // $title
+    'Game Details', // $title
     'guru_display_meta_box', // $callback
     'games', // $screen
     'normal', // $context
@@ -34,6 +34,12 @@ function guru_display_meta_box()
     <label for="guru_fields[steamURL]">Steam URL: </label>
     <input type="text" name="guru_fields[steamURL]" id="guru_fields[steamURL]" 
     class="regular-text" value="<?php echo $meta['steamURL']; ?>">
+  </p>
+
+  <p>
+    <label for="guru_fields[releaseYear]">Release Year: </label>
+    <input type="text" name="guru_fields[releaseYear]" id="guru_fields[releaseYear]" 
+    class="regular-text" value="<?php echo $meta['releaseYear']; ?>">
   </p>
 
 <?php }

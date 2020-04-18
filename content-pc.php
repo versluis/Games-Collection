@@ -64,7 +64,8 @@ if ( ! defined( 'ABSPATH' ) ) {
             // grab all games with platform
             $query = new WP_Query( array( 
                 'platform' => 'pc', 
-                'nopaging' => true )
+				'nopaging' => true, 
+				)
             );
             $results = $query->found_posts;
             echo "<p>There are <strong>$results PC Games</strong> in my collection:</p><ul>";

@@ -64,7 +64,6 @@ if ( ! defined( 'ABSPATH' ) ) {
             // grab all games with platform
             $query = new WP_Query( array( 
                 'post_type' => 'games', 
-				'posts_per_page' => -1,
 				'nopaging' => true,
 				)
             );
@@ -76,8 +75,8 @@ if ( ! defined( 'ABSPATH' ) ) {
             if ($query->have_posts() ) {
                 echo "";
                 while ($query->have_posts() ) {
-					$query->the_post();
-					$id = get_the_id($query->the_post());
+					$currentpost = $query->the_post();
+					$id = get_the_id($currentpost);
 					$terms = get_the_terms ($id, 'platform');
 					$platform = $terms[0]->name;
 

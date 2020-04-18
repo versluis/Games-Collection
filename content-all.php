@@ -73,8 +73,12 @@ if ( ! defined( 'ABSPATH' ) ) {
             if ($query->have_posts() ) {
                 echo "";
                 while ($query->have_posts() ) {
-                    $query->the_post();
-                    echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+					$query->the_post();
+					$id = get_the_id($query->the_post());
+					$terms = get_the_terms ($id, 'platform');
+					$platform = $terms[0]->name;
+					echo '<li><a href="' . get_permalink() . '">' . get_the_title() 
+					. ' (' . $platform . ') ' . get_the_date ('Y') . '</a></li>';
                 }
                 echo "</ul>";
             } // end of games list

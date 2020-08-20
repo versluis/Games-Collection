@@ -22,7 +22,6 @@ function your_theme_enqueue_styles() {
       wp_get_theme()->get('Version') 
     );
 }
-
 add_action('wp_enqueue_scripts', 'your_theme_enqueue_styles');
 
 /*  Add your own functions below this line.

@@ -36,6 +36,7 @@ include plugin_dir_path(__FILE__).'includes/meta.php';
 include plugin_dir_path(__FILE__).'includes/footer-tweak.php';
 include plugin_dir_path(__FILE__).'includes/custom-fields.php';
 include plugin_dir_path(__FILE__).'includes/steam-widget.php';
+include plugin_dir_path(__FILE__).'includes/page-queries.php';
 
 
 // add game posts to regular WordPress queries

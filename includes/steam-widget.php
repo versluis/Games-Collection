@@ -8,6 +8,9 @@
 // if we have a Steam URL in our content, display a widget
 // based on https://github.com/ruLait/wp-steam-shortcode
 function guru_show_steam_widget ( $steamURL ) {
+
+  // check if it's actually a Steam URL
+  if (strpos($steamURL, 'steampowered')) {
   
     // extract Steam ID
     $parts = explode('/', $steamURL);
@@ -25,5 +28,9 @@ function guru_show_steam_widget ( $steamURL ) {
   
     // show widget
     echo $steamWidget;
+  } else {
+    // just print the formatted URL
+    echo '<ul><li><a href ="' . $steamURL . '">' . $steamURL . '</a></li></ul>';
   }
   
+}

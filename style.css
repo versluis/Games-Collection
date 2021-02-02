@@ -15,6 +15,7 @@
  requires GeneratePress Premium
  added random header images from Among Trees
  added Page Heros
+ implemented separated styled lists
 
  1.0 - April 2020
  Initial Release - requires GeneratePress (free)
@@ -89,4 +90,10 @@
 .button.gradient3:hover,
 .button.gradient3:active {
     background-position: 0;
+}
+
+/* less padding for this HR separator in lists */
+.slimline {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

@@ -47,8 +47,8 @@ function guru_page_content()
     }
 }
 
-// print a list of games
-function guru_print_games ($query) {
+// print a list of games (replaced with TOC query)
+function guru_print_games2 ($query) {
 
     // list all games in query
     if ($query->have_posts()) {
@@ -59,6 +59,32 @@ function guru_print_games ($query) {
         }
         echo "</ul>";
     } // end of games list
+}
+
+// returns formatted TOC list
+// requires $query
+function guru_print_games ( $query ) {
+
+    // list articles
+    if ($query->have_posts()) {
+        $output = $output . '<ul>';
+
+        $count = 0;
+        while ($query->have_posts()) {
+
+            $count++;
+            $query->the_post();
+            $output = $output .  '<li style="list-style: disclosure-closed"><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+
+            if ($count >= 10) {
+                $output = $output . "<hr class='slimline'>";
+                $count = 0;
+            }
+        }
+        $output = $output .  "</ul>";
+
+        echo $output;
+    } // end list articles
 }
 
 // custom queries
